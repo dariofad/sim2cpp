@@ -68,6 +68,11 @@ Run the following command to compile the C++ code.
 Run the following command to exeute the generated executable file.
 `./Simulink2Code`
 
+## An Instance of automatic_transmission
+
+I also attached an automatic transmission model, a commonly-used simulink model in falsification community.
+
+
 ## Related Links
 
 - [Simulink code generation to c++ with Visual Studio build] (https://www.youtube.com/watch?v=xfLyc7BhoCk)
