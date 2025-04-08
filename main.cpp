@@ -16,10 +16,10 @@
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#include <stdio.h>              // This example main program uses printf/fflush
-#include "Simulink2Code.h"             // Model header file
+#include <stdio.h>         // This example main program uses printf/fflush
+#include "Simulink2Code.h" // Model header file
 
-static myPlus rtObj;                   // Instance of model class
+static myPlus rtObj; // Instance of model class
 
 //
 // Associating rt_OneStep with a real-time clock or interrupt service routine
@@ -35,12 +35,13 @@ static myPlus rtObj;                   // Instance of model class
 void rt_OneStep(void);
 void rt_OneStep(void)
 {
-  static boolean_T OverrunFlag{ false };
+  static boolean_T OverrunFlag{false};
 
   // Disable interrupts here
 
   // Check for overrun
-  if (OverrunFlag) {
+  if (OverrunFlag)
+  {
     rtObj.getRTM()->setErrorStatus("Overrun");
     return;
   }
@@ -79,15 +80,21 @@ int_T main(int_T argc, const char *argv[])
   // Initialize model
   rtObj.initialize();
 
-  // 设置输入值
-  rtObj.rtU.x = 10.0;
-  rtObj.rtU.y = 5.0;
-  
-  // 执行计算
-  rtObj.step();
-  
-  // 输出结果
-  printf("计算结果: %f + %f = %f\n", rtObj.rtU.x, rtObj.rtU.y, rtObj.rtY.result);
+  int x[10] = {2,2,2,2,2,20,20,20,20,20};
+  int y[10] = {1,1,1,1,1,10,10,10,10,10};
+
+  for (int i = 0; i < 10; i++)
+  {
+    // Set input signal in steps
+    rtObj.rtU.x = x[i];
+    rtObj.rtU.y = y[i];
+
+    // Perform a simulation step
+    rtObj.step();
+
+    // Print the output of the current step
+    printf("current output signal: %f + %f = %f\n", rtObj.rtU.x, rtObj.rtU.y, rtObj.rtY.result);
+  }
 
   // Terminate model
   rtObj.terminate();

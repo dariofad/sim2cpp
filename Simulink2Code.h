@@ -18,7 +18,7 @@
 //
 #ifndef Simulink2Code_h_
 #define Simulink2Code_h_
-#include <cmath>
+#include <math.h>
 #include "rtwtypes.h"
 #include "Simulink2Code_types.h"
 
