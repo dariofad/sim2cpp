@@ -1,9 +1,0 @@
-This file is the manifest for the generated code from model 'Simulink2Code'.
-/Users/ldy/git/Simulink2Code_ert_rtw/Simulink2Code.cpp
-/Users/ldy/git/Simulink2Code_ert_rtw/ert_main.cpp
-/Users/ldy/git/Simulink2Code_ert_rtw/Simulink2Code.h
-/Users/ldy/git/Simulink2Code_ert_rtw/Simulink2Code_private.h
-/Users/ldy/git/Simulink2Code_ert_rtw/Simulink2Code_types.h
-/Users/ldy/git/Simulink2Code_ert_rtw/rtwtypes.h
-/Users/ldy/git/Simulink2Code_ert_rtw/html
-/Users/ldy/git/Simulink2Code_ert_rtw/Simulink2Code_manifest.txt
