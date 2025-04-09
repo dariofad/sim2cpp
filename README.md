@@ -1,6 +1,6 @@
 # sim2cpp
 
-This repository provides a tutorial on converting a Simulink model to C++ code. 
+This repository provides a tutorial on how to convert a Simulink model into C++ code. 
 
 
 ## System Requirements
@@ -14,16 +14,16 @@ This repository provides a tutorial on converting a Simulink model to C++ code.
 - C++ compiler (e.g., Clang for MacOS)
 
 
-## Usage
+## The Steps to Convert a Simulink Model to C++ Code
 
-Here, I use Matlab (Simulink/Stateflow) 2024b and a toy Simulink model `Simulink2Code.slx` to demonstrate how to convert a Simulink model to C++ code. 
+Here, I use Matlab (Simulink/Stateflow) 2024b and a toy Simulink model `Simulink2Code.slx` to demonstrate how to convert a Simulink model into C++ code. 
 The `Simulink2Code` model implements a simple function: given two input signals `x` and `y`, it adds them and outputs a signal `result` after addition.
 
 ### 1. Install a C++ Compiler
 
 - For MacOS users, use the command `Clang --version` or `g++ --version` to check if the C++ compiler is installed.
   If not, use the command `xcode-select --install` to install Xcode Command Line Tools.
-- For Windows/Linux users, please check it yourself, as I don't have a PC with Windows/Linux installed.
+- For Windows/Linux users, please check it yourself, as I don't have a Windows/Linux development environment.
 
 ### 2. Convert a Simulink Model to C++
 
@@ -34,29 +34,35 @@ Before converting the model `Simulink2Code.slx` to C++ code, it is neccessary to
     1. In the `Solver` Tab of `Configuration Parameters`, set the `Type` under the Sub-Tab `Solver selection` as `Fixed-step`.
        The users can set the `Fixed-step size (fundamental sample time)` under the Sub-Tab `Solver details` according to the needs of the simulation.
        Here, I set the `Fixed-step size (fundamental sample time)` as 1 (second);
+
+    2. In the `Hardware Implementation` Tab of `Configuration Parameters`, set the `Device vendor` and `Device type` according to the user's own development environment.
+       Here, I choose `Apple` and `ARM64`;
        
-    2. In the `Code Generation` Tab of `Configuration Parameters`, set the `System target file` as `ert.tlc` and set the `Language` as `C++` under the Sub-Tab 'Target selection'.
+    3. In the `Code Generation` Tab of `Configuration Parameters`, set the `System target file` as `ert.tlc` and set the `Language` as `C++` under the Sub-Tab 'Target selection'.
        The users can select `Language standard` according to their needs. Here, I choose `C++14 (ISO)`;
        
-    3. In the `Code Generation` Tab of `Configuration Parameters`, check the item `Generate code only` and `Package code and artifacts` under the Sub-Tab `Build process`.
+    4. In the `Code Generation` Tab of `Configuration Parameters`, check the item `Generate code only` and `Package code and artifacts` under the Sub-Tab `Build process`.
        The option `Generate code only` means we intend to perform the compliation later; The option `Package code and artifacts` allows the generation of a zip file with a user-specified name,
-       which contains all the neccessary files to run the C++ code. The users can specify the name of the above zip file under the Sub-Tab `Advanced parameters`.
+       which contains all of the neccessary files to run the C++ code. The users can specify the name of this zip file under the Sub-Tab `Advanced parameters`.
        
     5. In the `Code Generation` Tab of `Configuration Parameters`, check the option `Create code generation report` and `Open report automatically` under the Sub-Tab `Report` of the Tab `Code Generation`.
-       Once the C++ code is generated, the user can view the C++ code generation report directly. 
+       Once the C++ code is generated, the user can view the C++ code generation report directly.
+
+    6. Click 'OK' at the bottom of `Configuration Parameters` to save the user's settings.
        
 - Click `APPS` on the top of the navigation bar of the opened `Simulink2Code.slx`, go to `CODE GENERATION`/`Embedded Coder`;
-  A new option `C++ CODE` will appear in the navigation bar of the opened `Simulink2Code.slx`;
+  A new option `C++ CODE` will appear in the navigation bar of the opened `Simulink2Code.slx`; 
   
-- Click `Quick Start` button, then follow the default options and click `Next` until the step `Word size`. Choose the Device Vendor and Device Type according to your hardware requirement.
-  Then, click `Next` until `Finished`.
+- The users can customize the Class Name and Namespace in the button `Code Interface`. The default `Class Name` is the name of this simulink model `Simulink2Code`.
 
-- The generated 
+- Click `Generate Code` button, choose `Generate code only`. 
 
-### 3. Custom Main Function
+- **Finally, a folder named `Simulink2Code_ert_rtw` and a zip file named `Simulink2Code` will be generated in the current directory. And a `Generation Report` window will pop up**.
 
-`Simulink2Code.h` and `Simulink2Code.app` define the necessary header file and source file. 
-We need to write our own main function to run the C++ code-based simulink model. An example `main.app` has been provided in this demo.
+### 3. Custom a Main Function
+
+Now, navigate to the `Simulink2Code_ert_rtw` folder. Simulink2Code.h` and `Simulink2Code.app` define the necessary header file and source file. 
+We need to write a main function to run the C++ code-based simulink model. An example `main.app` has been provided in this toy demo.
 
 ### 4. Compile 
 
@@ -71,6 +77,12 @@ Run the following command to exeute the generated executable file.
 ## An Instance of automatic_transmission
 
 I also attached an automatic transmission model, a commonly-used simulink model in falsification community.
+**I have made the necessary file arrangements and modifications.**
+Please navigate to the folder `AT/automatic_transmission_ert_rtw` and run the following command to compile the C++ code.
+```
+g++ -o automatic_transmission main.cpp automatic_transmission.cpp automatic_transmission_data.cpp  -I. -std=c++14
+./automatic_transmission
+```
 
 
 ## Related Links
