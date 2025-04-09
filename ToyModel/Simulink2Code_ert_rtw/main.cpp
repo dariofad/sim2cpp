@@ -80,8 +80,8 @@ int_T main(int_T argc, const char *argv[])
   // Initialize model
   Simulink2Code_Obj.initialize();
 
-  int x[10] = {2,2,2,2,2,20,20,20,20,20};
-  int y[10] = {1,1,1,1,1,10,10,10,10,10};
+  double x[10] = {2,2,2,2,2,20,20,20,20,20};
+  double y[10] = {1,1,1,1,1,10,10,10,10,10};
 
   for (int i = 0; i < 10; i++)
   {
@@ -93,7 +93,8 @@ int_T main(int_T argc, const char *argv[])
     Simulink2Code_Obj.step();
 
     // Print the output of the current step
-    printf("[x y z] at current step: %f, %f, %f\n", Simulink2Code_Obj.Simulink2Code_U.x, Simulink2Code_Obj.Simulink2Code_U.y, Simulink2Code_Obj.Simulink2Code_Y.result);
+    double Ts = 1; // sampling time
+    printf("at time %f, input (x, y): %f, %f; output (z): %f;\n", i * Ts, Simulink2Code_Obj.Simulink2Code_U.x, Simulink2Code_Obj.Simulink2Code_U.y, Simulink2Code_Obj.Simulink2Code_Y.result);
   }
 
   // Terminate model
