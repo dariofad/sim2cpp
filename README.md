@@ -61,7 +61,7 @@ Before converting the model `Simulink2Code.slx` to C++ code, it is neccessary to
 
 ### 3. Custom a Main Function
 
-Now, navigate to the `Simulink2Code_ert_rtw` folder. Simulink2Code.h` and `Simulink2Code.app` define the necessary header file and source file. 
+Now, navigate to the `Simulink2Code_ert_rtw` folder. `Simulink2Code.h` and `Simulink2Code.app` define the necessary header file and source file. 
 We need to write a main function to run the C++ code-based simulink model. An example `main.app` has been provided in this toy demo.
 
 ### 4. Compile 
@@ -84,6 +84,31 @@ g++ -o automatic_transmission main.cpp automatic_transmission.cpp automatic_tran
 ./automatic_transmission
 ```
 
+## An Instance of Adaptive Cruise Control System 
+
+I attached an Adaptive Cruise Control (ACC) system using Model Predictive Control (MPC) from Simulink.
+The `mpcACCsystem` folder contains official configuration files and the original reference model. 
+`mpcACCsystem.slx` is used to generate C++ code, and the resulting C++ files are placed in the `mpcACCsystem_ert_rtw` directory.
+
+**I have made the necessary file arrangements and modifications.**
+Please navigate to the folder `AdaptiveCruiseControlExample/mpcACCsystem_ert_rtw` and run the following command to compile the C++ code.
+```
+g++ -o mpcACCsystem main.cpp mpcACCsystem.cpp mpcACCsystem_data.cpp rtGetNaN.cpp rt_nonfinite.cpp -I. -std=c++14
+./mpcACCsystem
+```
+The output is printed in a time-stamped format showing key system signals at each simulation step, including a_lead, d_rel, v_rel, v_ego, and a_ego.
+```
+t = 0.00, a_lead = 0.000, d_rel = 40.375, v_rel = 4.994, v_ego = 20.006, a_ego = 0.852
+t = 0.10, ...
+```
+
+In the MATLAB command window, you can also run the Simulink model directly using the command 
+```
+sim(mpcACCsystem)
+```
+
+The simulation results will be stored in the `logsout` variable in the workspace.
+
 
 ## Related Links
 
@@ -93,8 +118,7 @@ g++ -o automatic_transmission main.cpp automatic_transmission.cpp automatic_tran
   
 - [Simulink/S-Function生成Windows可执行的C++代码] (https://www.bilibili.com/video/BV1v3411A7xX/?share_source=copy_web&vd_source=20273743de6c2b7275d51e34b7ccf476)
 
-
-
+- [Adaptive Cruise Control System Using Model Predictive Control from Simulink] (https://www.mathworks.com/help/mpc/ug/adaptive-cruise-control-using-model-predictive-controller.html)
 
 
 
