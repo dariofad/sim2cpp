@@ -109,6 +109,28 @@ sim(mpcACCsystem)
 
 The simulation results will be stored in the `logsout` variable in the workspace.
 
+## An Instance of a Dual-Vehicle Adaptive Cruise Control System (Lead Car and Ego Car)
+
+I attached a Dual_Vehicle Adaptive Cruise Control (ACC) system using Model Predictive Control (MPC) from Simulink.
+The Simulink models `leadCar.slx` and `egoCar.slx` generate the C++ code in the `leadCar_ert_rtw` and `egoCar_ert_rtw` directories, respectively.
+
+**I have made the necessary file arrangements and modifications.**
+Please navigate to the folder `DualACC/` and run the following command to compile the C++ code.
+```
+g++ -std=c++14 \
+  egoCar_ert_rtw/egoCar.cpp \
+  leadCar_ert_rtw/leadCar.cpp \
+  egoCar_ert_rtw/rt_nonfinite.cpp \
+  egoCar_ert_rtw/rtGetNaN.cpp \
+  main.cpp \
+  -IegoCar_ert_rtw -IleadCar_ert_rtw -I. \
+  -o dualACC
+```
+The output is printed in a time-stamped format showing key system signals at each simulation step, including a_lead, d_lead, v_lead; v_ego, a_ego; d_rel, v_rel.
+```
+t = 0.00, a_lead = 0.000, d_lead = 51.875, v_lead = 25.000; v_ego = 0.853, a_ego = 20.006; d_rel = 40.375, v_rel = 4.994
+t = 0.10, a_lead = 0.012, ...
+```
 
 ## Related Links
 
