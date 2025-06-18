@@ -1,0 +1,10 @@
+This file is the manifest for the generated code from model 'leadCar'.
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/ert_main.cpp
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/leadCar.cpp
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/leadCar.h
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/leadCar_private.h
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/leadCar_types.h
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/rtwtypes.h
+/Applications/MATLAB_R2024b.app/simulink/include/rtw_continuous.h
+/Applications/MATLAB_R2024b.app/simulink/include/rtw_solver.h
+/Users/deyun/git/sim2cpp/AdaptiveCruiseControlExample/leadCar_ert_rtw/leadCar_manifest.txt
