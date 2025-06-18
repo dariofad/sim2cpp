@@ -6,10 +6,13 @@ int main() {
     leadCar lead;
     egoCar ego;
 
+    const double Ts = 0.1;
+    const int steps = 801;
+
     lead.initialize();
     ego.initialize();
 
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < steps; ++i) {
         lead.step();
         const leadCar::ExtY_leadCar_T& leadOutput = lead.getExternalOutputs();
 
@@ -22,15 +25,16 @@ int main() {
 
         const egoCar::ExtY_egoCar_T& egoOutput = ego.getExternalOutputs();
 
-        std::cout << "Step " << i
-          << ": a_lead = " << leadOutput.a_lead
-          << ", d_lead = " << leadOutput.d_lead
-          << ", v_lead = " << leadOutput.v_lead
-          << " | a_ego = " << egoOutput.a_ego
-          << ", v_ego = " << egoOutput.v_ego
-          << " | d_rel = " << egoOutput.d_rel
-          << ", v_rel = " << egoOutput.v_rel
-          << std::endl;    }
+        printf("t = %.2f, a_lead = %.3f, d_lead = %.3f, v_lead = %.3f; v_ego = %.3f, a_ego = %.3f; d_rel = %.3f, v_rel = %.3f\n",
+               i * Ts,
+               leadOutput.a_lead,
+               leadOutput.d_lead,
+               leadOutput.v_lead,
+               egoOutput.a_ego,
+               egoOutput.v_ego,
+               egoOutput.d_rel,
+               egoOutput.v_rel);
+    }
 
     return 0;
 }
