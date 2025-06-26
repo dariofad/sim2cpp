@@ -2,6 +2,8 @@
 #include "leadCar.h"
 #include "egoCar.h"
 
+#include <limits.h>
+
 int main() {
     leadCar lead;
     egoCar ego;
@@ -12,7 +14,7 @@ int main() {
     lead.initialize();
     ego.initialize();
 
-    for (int i = 0; i < steps; ++i) {
+    for (int i = 0; i < INT_MAX; ++i) {
         lead.step();
         const leadCar::ExtY_leadCar_T& leadOutput = lead.getExternalOutputs();
 

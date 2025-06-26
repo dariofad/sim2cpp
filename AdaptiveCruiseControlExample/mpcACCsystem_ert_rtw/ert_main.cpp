@@ -85,7 +85,9 @@ int_T main(int_T argc, const char *argv[])
   while (mpcACCsystem_Obj.getRTM()->getErrorStatus() == (nullptr)&&
          !mpcACCsystem_Obj.getRTM()->getStopRequested()) {
     rt_OneStep();
-  }
+    printf("d_rel = %f\n", mpcACCsystem_Obj.getExternalOutputs().d_rel);
+    printf("v_ego = %f\n", mpcACCsystem_Obj.getExternalOutputs().v_ego);
+   }
 
   // Terminate model
   mpcACCsystem_Obj.terminate();

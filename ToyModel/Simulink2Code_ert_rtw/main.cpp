@@ -19,6 +19,10 @@
 #include <stdio.h>         // This example main program uses printf/fflush
 #include "Simulink2Code.h" // Model header file
 
+#include <stdio.h>
+#include <limits.h>
+
+
 static Simulink2Code Simulink2Code_Obj; // Instance of model class
 
 //
@@ -32,7 +36,7 @@ static Simulink2Code Simulink2Code_Obj; // Instance of model class
 // your application needs.  This example simply sets an error status in the
 // real-time model and returns from rt_OneStep.
 //
-void rt_OneStep(void);
+void rt_OneStep(void)  __attribute__((noinline));
 void rt_OneStep(void)
 {
   static boolean_T OverrunFlag{false};
@@ -80,21 +84,27 @@ int_T main(int_T argc, const char *argv[])
   // Initialize model
   Simulink2Code_Obj.initialize();
 
-  double x[10] = {2,2,2,2,2,20,20,20,20,20};
-  double y[10] = {1,1,1,1,1,10,10,10,10,10};
+  int x[10] = {0,1,2,3,4,5,6,7,8,9};
+  //int y[10] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+  Simulink2Code_Obj.Simulink2Code_U.y = 0;
 
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < INT_MAX; i++)
   {
     // Set input signals in steps
-    Simulink2Code_Obj.Simulink2Code_U.x = x[i];
-    Simulink2Code_Obj.Simulink2Code_U.y = y[i];
+    Simulink2Code_Obj.Simulink2Code_U.x = x[i%10];
+    //Simulink2Code_Obj.Simulink2Code_U.y = y[i%10];
 
     // Perform a simulation step
-    Simulink2Code_Obj.step();
+    //  Simulink2Code_Obj.step()
+    rt_OneStep();
 
     // Print the output of the current step
     double Ts = 1; // sampling time
-    printf("at time %f, input (x, y): %f, %f; output (z): %f;\n", i * Ts, Simulink2Code_Obj.Simulink2Code_U.x, Simulink2Code_Obj.Simulink2Code_U.y, Simulink2Code_Obj.Simulink2Code_Y.result);
+    printf("at time %f, input (x, y): %d, %d; output (z): %d;\n", i * Ts,
+	   Simulink2Code_Obj.Simulink2Code_U.x,
+           Simulink2Code_Obj.Simulink2Code_U.y,
+           Simulink2Code_Obj.Simulink2Code_Y.result);
+    
   }
 
   // Terminate model
