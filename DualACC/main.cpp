@@ -4,9 +4,10 @@
 
 #include <limits.h>
 
+static leadCar lead;
+static egoCar ego;
+
 int main() {
-    leadCar lead;
-    egoCar ego;
 
     const double Ts = 0.1;
     const int steps = 801;
