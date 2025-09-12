@@ -28,15 +28,11 @@ int main() {
 
         const egoCar::ExtY_egoCar_T& egoOutput = ego.getExternalOutputs();
 
-        printf("t = %.2f, a_lead = %.3f, d_lead = %.3f, v_lead = %.3f; v_ego = %.3f, a_ego = %.3f; d_rel = %.3f, v_rel = %.3f\n",
+        printf("After step, t = %.2f, a_ego = %.3f, v_ego = %.3f, d_rel = %.3f\n",
                i * Ts,
-               leadOutput.a_lead,
-               leadOutput.d_lead,
-               leadOutput.v_lead,
                egoOutput.a_ego,
                egoOutput.v_ego,
-               egoOutput.d_rel,
-               egoOutput.v_rel);
+               egoOutput.d_rel);
     }
 
     return 0;

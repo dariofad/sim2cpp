@@ -22,6 +22,8 @@
 #include <cmath>
 #include "egoCar_private.h"
 #include "cmath"
+#include <cstdio>
+#include <cstdint>
 
 // Named constants for MATLAB Function: '<S34>/optimizer'
 const real_T egoCar_RMDscale{ 0.02 };
@@ -2295,6 +2297,8 @@ void egoCar::step()
   //   Sum: '<S2>/Sum'
 
   egoCar_Y.d_rel = egoCar_U.d_lead - (egoCar_X.Integrator1_CSTATE + 10.0);
+
+  printf("Within step, d_rel = d_rel = %.3f, u64_repr = %llu\n", egoCar_Y.d_rel, *(uint64_t *)&egoCar_Y.d_rel);
 
   // MATLAB Function: '<S1>/DataTypeConversion_reldist'
   egoCar_DataTypeConversion_L0(egoCar_Y.d_rel, &y_h);
