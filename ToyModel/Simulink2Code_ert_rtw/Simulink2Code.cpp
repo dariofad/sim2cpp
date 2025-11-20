@@ -27,6 +27,7 @@ void Simulink2Code::step()
   //   Sum: '<Root>/Plus'
 
   Simulink2Code_Y.result = Simulink2Code_U.x + Simulink2Code_U.y;
+  
 }
 
 // Model initialize function
