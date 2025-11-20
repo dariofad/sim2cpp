@@ -29,13 +29,13 @@ class Simulink2Code final
  public:
   // External inputs (root inport signals with default storage)
   struct ExtU_Simulink2Code_T {
-    int x;                          // '<Root>/x'
-    int y;                          // '<Root>/y'
+    double x;                          // '<Root>/x'
+    double y;                          // '<Root>/y'
   };
 
   // External outputs (root outports fed by signals with default storage)
   struct ExtY_Simulink2Code_T {
-    int result;                     // '<Root>/result'
+    double result;                     // '<Root>/result'
   };
 
   // Real-time Model Data Structure

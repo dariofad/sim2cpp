@@ -22,6 +22,9 @@
 #include <stdio.h>
 #include <limits.h>
 
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 static Simulink2Code Simulink2Code_Obj; // Instance of model class
 
@@ -81,18 +84,25 @@ int_T main(int_T argc, const char *argv[])
   (void)(argc);
   (void)(argv);
 
+  // Configure an external clock signal
+  using namespace std::chrono;
+  auto interval = milliseconds(100);
+  system_clock::time_point next_call_time = system_clock::now() + interval;
+  
   // Initialize model
   Simulink2Code_Obj.initialize();
 
-  int x[10] = {0,1,2,3,4,5,6,7,8,9};
-  //int y[10] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+  double x[10] = {0,1,2,3,4,5,6,7,8,9};
+  double y[10] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
   Simulink2Code_Obj.Simulink2Code_U.y = 0;
 
-  for (int i = 0; i < INT_MAX; i++)
+  for (int i = 0; i < 100; i++)
   {
+     std::this_thread::sleep_until(next_call_time);
+	  
     // Set input signals in steps
     Simulink2Code_Obj.Simulink2Code_U.x = x[i%10];
-    //Simulink2Code_Obj.Simulink2Code_U.y = y[i%10];
+    Simulink2Code_Obj.Simulink2Code_U.y = y[i%10];
 
     // Perform a simulation step
     //  Simulink2Code_Obj.step()
@@ -100,11 +110,12 @@ int_T main(int_T argc, const char *argv[])
 
     // Print the output of the current step
     double Ts = 1; // sampling time
-    printf("at time %f, input (x, y): %d, %d; output (z): %d;\n", i * Ts,
+    printf("at time %d, input (x, y): %f, %f; output (z): %f;\n", int(i * Ts),
 	   Simulink2Code_Obj.Simulink2Code_U.x,
            Simulink2Code_Obj.Simulink2Code_U.y,
            Simulink2Code_Obj.Simulink2Code_Y.result);
-    
+
+    next_call_time += interval;
   }
 
   // Terminate model
