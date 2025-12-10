@@ -1060,6 +1060,7 @@ void egoCar::egoCar_qpkwik(const real_T b_Linv[16], const real_T b_Hinv[16],
 void egoCar::step()
 {
   // local block i/o variables
+
   real_T rtb_y;
   real_T rtb_y_n;
   real_T Bc[96];
@@ -2569,7 +2570,8 @@ void egoCar::step()
 
       (&egoCar_M)->Timing.clockTick1++;
     }
-  }                                    // end MajorTimeStep
+  } // end MajorTimeStep
+  
 }
 
 // Derivatives for root system: '<Root>'

@@ -86,7 +86,7 @@ int_T main(int_T argc, const char *argv[])
 
   // Configure an external clock signal
   using namespace std::chrono;
-  auto interval = milliseconds(100);
+  auto interval = milliseconds(1000);
   system_clock::time_point next_call_time = system_clock::now() + interval;
   
   // Initialize model
@@ -96,7 +96,7 @@ int_T main(int_T argc, const char *argv[])
   double y[10] = {10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
   Simulink2Code_Obj.Simulink2Code_U.y = 0;
 
-  for (int i = 0; i < 100; i++)
+  for (int i = 0; i < 20; i++)
   {
      std::this_thread::sleep_until(next_call_time);
 	  
