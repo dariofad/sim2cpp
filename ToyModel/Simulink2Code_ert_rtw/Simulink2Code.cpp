@@ -26,7 +26,7 @@ void Simulink2Code::step()
   //   Inport: '<Root>/y'
   //   Sum: '<Root>/Plus'
 
-  Simulink2Code_Y.result = Simulink2Code_U.x + Simulink2Code_U.y;
+  Simulink2Code_Y.result = Simulink2Code_U.x + Simulink2Code_U.y + model_offset;
   
 }
 
