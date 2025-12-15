@@ -33,6 +33,8 @@ class Simulink2Code final
     double y;                          // '<Root>/y'
   };
 
+  double model_offset = 0;
+
   // External outputs (root outports fed by signals with default storage)
   struct ExtY_Simulink2Code_T {
     double result;                     // '<Root>/result'
