@@ -18,8 +18,8 @@ int main() {
     double pedal_offset = 20.0;
     double rpm_offset = 900.0;
 
-    const int num_steps = 10000;
-    double ts = 0.002;
+    const int num_steps = 1001;
+    double ts = 0.005;
 
     for (int i = 0; i < num_steps; ++i) {
 
