@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -Wextra
+CXXFLAGS = -std=c++14 -Wall -Wextra -g -O0
 TARGET = fuel_control
 SOURCES = main.cpp AbstractFuelControl_M1.cpp \
 	AbstractFuelControl_M1_data.cpp \
@@ -23,4 +23,7 @@ clean:
 run:
 	./$(TARGET)
 
-.PHONY: all clean
+symbols:
+	objdump --demangle -t $(TARGET)
+
+.PHONY: all clean run symbols
