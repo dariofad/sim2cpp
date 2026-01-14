@@ -9,7 +9,7 @@ int main() {
 
     // slowdown the model to observe the perturbations
     using namespace std::chrono;
-    auto interval = milliseconds(500);
+    auto interval = milliseconds(1);
     system_clock::time_point next_call_time = system_clock::now() + interval;
 
     model.initialize();
@@ -18,15 +18,15 @@ int main() {
     double pedal_offset = 20.0;
     double rpm_offset = 900.0;
 
-    const int num_steps = 20;
-    double ts = 0.001;
+    const int num_steps = 10000;
+    double ts = 0.002;
 
     for (int i = 0; i < num_steps; ++i) {
 
         std::this_thread::sleep_until(next_call_time);	    
 
-        inputs.PedalAngle = pedal_offset + (double)i * 2 / 10;
-	inputs.EngineSpeed = rpm_offset + (double)i;
+        inputs.PedalAngle = pedal_offset + (double)(i % 60) / 10;
+	inputs.EngineSpeed = rpm_offset + i % 150;
 	    
         model.setExternalInputs(&inputs);
         model.step();
